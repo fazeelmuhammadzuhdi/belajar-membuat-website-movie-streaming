@@ -17,7 +17,8 @@ class MovieController extends Controller
     {
         // dd($request->all());
 
-        $validateData = $request->validate(
+        $data = $request->except('_token');
+        $request->validate(
             [
                 'title' => 'required',
                 'small_thumbnail' => 'required|image|mimes:jpeg,jpg,png',
@@ -54,7 +55,22 @@ class MovieController extends Controller
             ]
         );
 
-        $validateData = Movie::create($request->all());
+        $smallThumbnail = $request->small_thumbnail;
+        $largeThumbnail = $request->large_thumbnail;
+
+        //Nama File Image
+        $originalSmallThumbnailName = $smallThumbnail->getClientOriginalName();
+        $originalLargeThumbnailName = $largeThumbnail->getClientOriginalName();
+
+        //Memasukkan Ke Folder
+        $smallThumbnail->storeAs('public/thumbnail', $originalSmallThumbnailName);
+        $largeThumbnail->storeAs('public/thumbnail', $originalLargeThumbnailName);
+
+        //insert ke database
+        $data['small_thumbnail'] = $originalSmallThumbnailName;
+        $data['large_thumbnail'] = $originalLargeThumbnailName;
+
+        Movie::create($data);
 
         return redirect()->route('movie.create')->with('success', "Data Berhasil Di Simpan");
     }
