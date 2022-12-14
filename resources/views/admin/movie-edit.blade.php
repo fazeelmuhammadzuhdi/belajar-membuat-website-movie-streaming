@@ -1,11 +1,7 @@
 @extends('admin.layouts.base')
 
-@section('title', 'Edit Movies')
+@section('title', 'Edit Movie')
 
-@section('content')
-    @extends('admin.layouts.base')
-
-@section('title', 'Movies')
 
 @section('content')
     <div class="row">
@@ -15,12 +11,13 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Create Movie</h3>
+                    <h3 class="card-title">Edit Movie</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form enctype="multipart/form-data" method="POST" action="{{ route('movie.update', $movies->id) }}">
                     @csrf
+                    @method('PUT')
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-4">
@@ -50,7 +47,7 @@
                             <div class="form-group col-4">
                                 <label for="movie">Movie</label>
                                 <input type="text" class="form-control @error('movie') is-invalid @enderror"
-                                    id="movie" name="movie" placeholder="Video url" value="{{ old('movie') }}">
+                                    id="movie" name="movie" placeholder="Video url" value="{{ $movies->movie }}">
 
                                 @error('movie')
                                     <div class="invalid-feedback">
@@ -64,7 +61,7 @@
                             <div class="form-group col-4">
                                 <label for="duration">Duration</label>
                                 <input type="text" class="form-control @error('duration') is-invalid @enderror"
-                                    id="duration" name="duration" placeholder="1h 39m" value="{{ old('duration') }}">
+                                    id="duration" name="duration" placeholder="1h 39m" value="{{ $movies->duration }}">
 
                                 @error('duration')
                                     <div class="invalid-feedback">
@@ -77,7 +74,7 @@
                                 <div class="input-group date" id="release-date" data-target-input="nearest">
                                     <input type="text" name="release_date"
                                         class="form-control datetimepicker-input @error('release_date') is-invalid @enderror"
-                                        data-target="#release-date" value="{{ old('release_date') }}" />
+                                        data-target="#release-date" value="{{ $movies->release_date }}" />
                                     <div class="input-group-append" data-target="#release-date"
                                         data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -92,7 +89,7 @@
                             <div class="form-group col-4">
                                 <label for="short-about">Casts</label>
                                 <input type="text" class="form-control @error('casts') is-invalid @enderror"
-                                    id="casts" name="casts" placeholder="Jackie Chan" value="{{ old('casts') }}">
+                                    id="casts" name="casts" placeholder="Jackie Chan" value="{{ $movies->casts }}">
                                 @error('casts')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -105,7 +102,7 @@
                                 <label for="short-about">Categories</label>
                                 <input type="text" class="form-control @error('categories') is-invalid @enderror"
                                     id="categories" name="categories" placeholder="Action, Fantasy"
-                                    value="{{ old('categories') }}">
+                                    value="{{ $movies->categories }}">
 
                                 @error('categories')
                                     <div class="invalid-feedback">
@@ -128,7 +125,7 @@
                                 <label for="short-about">Short About</label>
                                 <input type="text" class="form-control @error('short_about') is-invalid @enderror"
                                     id="short_about" name="short_about" placeholder="Awesome Movie"
-                                    value="{{ old('short_about') }}">
+                                    value="{{ $movies->short_about }}">
 
                                 @error('short_about')
                                     <div class="invalid-feedback">
@@ -140,7 +137,7 @@
                                 <label for="short-about">About</label>
                                 <input type="text" class="form-control @error('about') is-invalid @enderror"
                                     id="about" name="about" placeholder="Awesome Movie"
-                                    value="{{ old('about') }}">
+                                    value="{{ $movies->about }}">
                                 @error('about')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -150,8 +147,8 @@
                             <div class="form-group col-4">
                                 <label>Featured</label>
                                 <select class="custom-select" name="featured">
-                                    <option value="0" {{ old('featured') == '0' ? 'selected' : '' }}>No</option>
-                                    <option value="1" {{ old('featured') == '1' ? 'selected' : '' }}>Yes</option>
+                                    <option value="0" {{ $movies->featured == '0' ? 'selected' : '' }}>No</option>
+                                    <option value="1" {{ $movies->featured == '1' ? 'selected' : '' }}>Yes</option>
                                 </select>
                             </div>
                         </div>
@@ -165,4 +162,42 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+
+    @if (session('success') == true)
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2500
+            })
+        </script>
+    @endif
+    <script>
+        $('#release-date').datetimepicker({
+            format: 'YYYY-MM-DD'
+        })
+    </script>
+@endsection
+
+@section('js')
+    @if (session('success') == true)
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2500
+            })
+        </script>
+    @endif
+    <script>
+        $('#release-date').datetimepicker({
+            format: 'YYYY-MM-DD'
+        })
+    </script>
 @endsection

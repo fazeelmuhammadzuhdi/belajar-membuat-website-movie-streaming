@@ -22,6 +22,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <table id="example2" class="table table-bordered table-hover">
+                                <input type="hidden" name="id" id="id">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -49,12 +50,15 @@
                                                 <a href="{{ route('movie.edit', $movie->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt">
                                                         Edit</i></a>
-                                                {{-- <form action="" method="POST">
+                                                {{-- <form action="#" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fas fa-trash"> Hapus</i></button>
+                                                            class="fas fa-trash" id="hapus"> Hapus</i></button>
                                                 </form> --}}
+
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"
+                                                        id="hapus"> Hapus</i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -81,11 +85,64 @@
         </script>
     @endif
     <script>
+        $(document).ready(function() {
+            $('#example2').DataTable();
+        });
+
         $('#release-date').datetimepicker({
             format: 'YYYY-MM-DD'
         })
+
+        $(document).on('click', '#hapus', function() {
+            let id = $(this).attr('id')
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('movie.destroy') }}",
+                        data: {
+                            id: id,
+                            _token: "{{ csrf_token() }}",
+                            _method: "DELETE"
+                        },
+                        success: function(response, status) {
+                            if (status = '200') {
+                                setTimeout(() => {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: response.text,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    }).then((response) => {
+                                        $('#myTable').DataTable().ajax.reload()
+                                    })
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Gagal Menghapus!',
+                            })
+                        }
+                    });
+                }
+            })
+        })
     </script>
 @endsection
+
+
 {{-- @push('after-script')
     <script>
         $('#release-date').datetimepicker({
