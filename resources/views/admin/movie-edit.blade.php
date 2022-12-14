@@ -1,5 +1,10 @@
 @extends('admin.layouts.base')
 
+@section('title', 'Edit Movies')
+
+@section('content')
+    @extends('admin.layouts.base')
+
 @section('title', 'Movies')
 
 @section('content')
@@ -14,7 +19,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form enctype="multipart/form-data" method="POST" action="{{ route('movie.store') }}">
+                <form enctype="multipart/form-data" method="POST" action="{{ route('movie.update', $movies->id) }}">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -22,7 +27,7 @@
                                 <label for="title">Title</label>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror"
                                     id="title" name="title" placeholder="e.g Guardian of The Galaxy"
-                                    value="{{ old('title') }}" autofocus>
+                                    value="{{ $movies->title }}" autofocus>
 
                                 @error('title')
                                     <div class="invalid-feedback">
@@ -33,7 +38,7 @@
                             <div class="form-group col-4">
                                 <label for="trailer">Trailer</label>
                                 <input type="text" class="form-control @error('trailer') is-invalid @enderror"
-                                    id="trailer" name="trailer" placeholder="Video url" value="{{ old('trailer') }}">
+                                    id="trailer" name="trailer" placeholder="Video url" value="{{ $movies->trailer }}">
 
                                 @error('trailer')
                                     <div class="invalid-feedback">
@@ -161,29 +166,3 @@
         </div>
     </div>
 @endsection
-@section('js')
-
-    @if (session('success') == true)
-        <script>
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: '{{ session('success') }}',
-                showConfirmButton: false,
-                timer: 2500
-            })
-        </script>
-    @endif
-    <script>
-        $('#release-date').datetimepicker({
-            format: 'YYYY-MM-DD'
-        })
-    </script>
-@endsection
-{{-- @push('after-script')
-    <script>
-        $('#release-date').datetimepicker({
-            format: 'YYYY-MM-DD'
-        })
-    </script>
-@endpush --}}

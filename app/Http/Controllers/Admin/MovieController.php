@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Movie;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MovieController extends Controller
 {
+    public function index()
+    {
+        $movies = Movie::all();
+
+        return view('admin.movie-index', [
+            'movies' => $movies
+        ]);
+    }
+
     public function create()
     {
         return view('admin.movie-create');
@@ -59,8 +69,8 @@ class MovieController extends Controller
         $largeThumbnail = $request->large_thumbnail;
 
         //Nama File Image
-        $originalSmallThumbnailName = $smallThumbnail->getClientOriginalName();
-        $originalLargeThumbnailName = $largeThumbnail->getClientOriginalName();
+        $originalSmallThumbnailName = Str::random(10) . $smallThumbnail->getClientOriginalName();
+        $originalLargeThumbnailName = Str::random(10) . $largeThumbnail->getClientOriginalName();
 
         //Memasukkan Ke Folder
         $smallThumbnail->storeAs('public/thumbnail', $originalSmallThumbnailName);
@@ -72,6 +82,18 @@ class MovieController extends Controller
 
         Movie::create($data);
 
-        return redirect()->route('movie.create')->with('success', "Data Berhasil Di Simpan");
+        return redirect()->route('movie.index')->with('success', "Data Berhasil Di Simpan");
+    }
+
+    public function edit($id)
+    {
+        // cara Pertama
+        $movies = Movie::find($id);
+
+        //Cara kedua
+        // $movies = Movie::where('id', $id)->first();
+        return view('admin.movie-edit', [
+            'movies' => $movies
+        ]);
     }
 }

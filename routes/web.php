@@ -25,7 +25,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'index']);
 
     Route::group(['prefix' => 'movie'], function () {
+        Route::get('/', [MovieController::class, 'index'])->name('movie.index');
         Route::get('/create', [MovieController::class, 'create'])->name('movie.create');
         Route::post('/store', [MovieController::class, 'store'])->name('movie.store');
+        Route::get('/edit/{id}', [MovieController::class, 'edit'])->name('movie.edit');
+        Route::post('/update/{id}', [MovieController::class, 'update'])->name('movie.update');
     });
 });
