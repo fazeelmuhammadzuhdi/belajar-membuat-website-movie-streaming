@@ -22,7 +22,6 @@
                     <div class="row">
                         <div class="col-md-12">
                             <table id="example2" class="table table-bordered table-hover">
-                                <input type="hidden" name="id" id="id">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -31,7 +30,7 @@
                                         <th>Large Thumbnail</th>
                                         <th>Categories</th>
                                         <th>Casts</th>
-                                        <th>Action</th>
+                                        <th width="15%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,15 +49,18 @@
                                                 <a href="{{ route('movie.edit', $movie->id) }}"
                                                     class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt">
                                                         Edit</i></a>
-                                                {{-- <form action="#" method="POST">
+                                                <form action="{{ route('movie.destroy', $movie->id) }}" method="POST"
+                                                    style="display: inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fas fa-trash" id="hapus"> Hapus</i></button>
-                                                </form> --}}
+                                                    <button type="submit" class="btn btn-danger btn-sm hapus"><i
+                                                            class="fas fa-trash"
+                                                            onclick="return confirm('Apakah Yakin Ingin Menghapus Data Ini?')">
+                                                            Hapus</i></button>
+                                                </form>
 
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"
-                                                        id="hapus"> Hapus</i></button>
+                                                {{-- <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"
+                                                        id="hapus"> Hapus</i></button> --}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -71,7 +73,7 @@
         </div>
     </div>
 @endsection
-@section('js')
+@push('after-script')
 
     @if (session('success') == true)
         <script>
@@ -92,55 +94,8 @@
         $('#release-date').datetimepicker({
             format: 'YYYY-MM-DD'
         })
-
-        $(document).on('click', '#hapus', function() {
-            let id = $(this).attr('id')
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "post",
-                        url: "{{ route('movie.destroy') }}",
-                        data: {
-                            id: id,
-                            _token: "{{ csrf_token() }}",
-                            _method: "DELETE"
-                        },
-                        success: function(response, status) {
-                            if (status = '200') {
-                                setTimeout(() => {
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: response.text,
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    }).then((response) => {
-                                        $('#myTable').DataTable().ajax.reload()
-                                    })
-                                });
-                            }
-                        },
-                        error: function(xhr) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Gagal Menghapus!',
-                            })
-                        }
-                    });
-                }
-            })
-        })
     </script>
-@endsection
+@endpush
 
 
 {{-- @push('after-script')

@@ -30,6 +30,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/store', [MovieController::class, 'store'])->name('movie.store');
         Route::get('/edit/{id}', [MovieController::class, 'edit'])->name('movie.edit');
         Route::put('/update/{id}', [MovieController::class, 'update'])->name('movie.update');
-        Route::delete('/delete', [MovieController::class, 'destroy'])->name('movie.destroy');
+        Route::delete('/delete/{id}', [MovieController::class, 'destroy'])->name('movie.destroy');
     });
 });

@@ -165,19 +165,25 @@ class MovieController extends Controller
         return redirect()->route('movie.index')->with('success', "Data Berhasil Di Update");
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $data = Movie::find($request->id);
-        $hapus = $data->delete($request->all());
+
+        // Movie::where('id', $id)->delete();
+        // return back();
+
+        $data = Movie::findOrFail($id);
+        $hapus = $data->delete();
+
+        if ($hapus) {
+            return redirect()->route('movie.index')->with('success', "Data Berhasil Di Hapus");
+        } else {
+            abort(404);
+        }
 
         // $item = Movie::findOrFail($id);
 
         // $hapus = $item->delete();
 
-        if ($hapus) {
-            return response()->json(['text' => 'Data Berhasil Di Hapus'], 200);
-        } else {
-            return response()->json(['text' => 'Data Gagal Di Hapus'], 400);
-        }
+        // return redirect()->route('movie.index');
     }
 }
