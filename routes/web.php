@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MovieController;
+use App\Http\Controllers\Admin\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,8 @@ Route::post('/admin/login', [LoginController::class, 'authenticate'])->name('adm
 Route::group(['prefix' => 'admin', 'middleware' => ['admin.auth']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+    Route::get('/logout', [LoginController::class, 'logout'])->name('admin.login.logout');
+
     Route::group(['prefix' => 'movie'], function () {
         Route::get('/', [MovieController::class, 'index'])->name('movie.index');
         Route::get('/create', [MovieController::class, 'create'])->name('movie.create');
@@ -35,4 +38,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin.auth']], function () 
         Route::put('/update/{id}', [MovieController::class, 'update'])->name('movie.update');
         Route::delete('/delete/{id}', [MovieController::class, 'destroy'])->name('movie.destroy');
     });
+
+    Route::get('/transaction', [TransactionController::class, 'index'])->name('admin.transaction');
 });
