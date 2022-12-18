@@ -116,7 +116,7 @@
             <div class="max-w-screen hidden h-full mx-auto bg-black bg-opacity-70 fixed z-30 inset-0" id="openStream">
             </div>
             <video-js
-                class="frame-video overflow-hidden hidden fixed h-[405px] max-h-max max-w-full w-[720px] top-[25%] -translate-y-[25%] left-1/2 -translate-x-1/2 z-50"
+                class="frame-video overflow-hidden hidden fixed h-[405px] max-h-max max-w-full w-[720px] top-[25%] -translate-y-[25%] left-1/2 -translate-x-1/2 z-50 "
                 id="stream-video">
                 <source src="https://d33kv075lir7n3.cloudfront.net/Details+Screen+Part+Final.mp4" type="video/mp4" />
                 <p class="vjs-no-js text-twmdark">

@@ -51,7 +51,7 @@
 
                     <!-- Form login -->
                     <section class="w-11/12 max-w-[460px]">
-                        <form action="#" method="POST"
+                        <form action="{{ route('member.login.auth') }}" method="POST"
                             class="mt-[70px] flex flex-col bg-white p-[30px] rounded-2xl gap-6">
                             @csrf
                             <div class="form-input flex flex-col gap-3">
@@ -74,11 +74,13 @@
                                 @enderror
                             </div>
                             @error('credentials')
-                                <div style="color: red">{{ $message }}</div>
+                                <div style="color: red; text-align: center">{{ $message }}</div>
                             @enderror
                             <button type="submit" class="bg-indigo-600 rounded-full py-3 mt-4 text-center">
                                 <span class="font-semibold text-white text-base">Continue</span>
                             </button>
+
+
                         </form>
                     </section>
                 </div>

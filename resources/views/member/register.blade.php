@@ -95,6 +95,10 @@
                             <button type="submit" class="bg-indigo-600 rounded-full py-3 mt-4 text-center">
                                 <span class="font-semibold text-white text-base">Continue</span>
                             </button>
+                            <a href="{{ route('member.login') }}"
+                                class="bg-green-600 rounded-full py-3 mt-4 text-center">
+                                <span class="font-semibold text-white text-base">Sudah Punya Akun ? Login Sini</span>
+                            </a>
                         </form>
                     </section>
                 </div>
