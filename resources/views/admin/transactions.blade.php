@@ -32,7 +32,13 @@
                                             <td>{{ $item->user->email }}</td>
                                             <td>{{ $item->amount }}</td>
                                             <td>{{ $item->transaction_code }}</td>
-                                            <td>{{ $item->status }}</td>
+                                            <td>
+                                                @if ($item->status == 'success')
+                                                    <span class="badge badge-success">{{ $item->status }}</span>
+                                                @else
+                                                    <span class="badge badge-primary">{{ $item->status }}</span>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -44,3 +50,9 @@
         </div>
     </div>
 @endsection
+
+@push('after-script')
+    <script>
+        $('#example2').DataTable();
+    </script>
+@endpush
