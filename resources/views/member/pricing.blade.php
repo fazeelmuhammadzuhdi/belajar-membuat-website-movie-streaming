@@ -46,9 +46,9 @@
         <div class="col-span-12 col-start-1 lg:col-start-2 xl:col-start-4">
             <div class="px-5 lg:px-[60px] pt-[30px] relative">
                 <!-- Logo & User Avatar -->
-                {{-- @if (auth()->user())
+                @if (auth()->user())
                     @include('member.layouts.navbar')
-                @endif --}}
+                @endif
 
                 <div class="pt-[85px] flex flex-col items-center gap-5">
                     <p class="text-sky-300 text-base font-semibold">
@@ -64,10 +64,10 @@
                         <div
                             class="pricing-card flex flex-col p-[30px] bg-white rounded-2xl w-full lg: w-[330px] md:max-w-max lg:max-w-[330px]">
                             <p class="text-stream-dark font-medium text-base">
-                                {{-- {{ ucwords($standard->name) }} --}}
+                                {{ ucwords($standard->name) }}
                             </p>
                             <div class="text-3xl text-stream-dark font-semibold my-1">
-                                {{-- Rp {{ number_format($standard->price) }} --}}
+                                Rp {{ number_format($standard->price) }}
                             </div>
                             <p class="text-sm text-stream-gray">
                                 /bulan
@@ -79,7 +79,7 @@
                                 <!-- benefits -->
                                 <div class="flex items-center justify-between gap-3">
                                     <span class="li-benefits">
-                                        {{-- {{ $standard->max_users }} Users Limits --}}
+                                        {{ $standard->max_users }} Users Limits
                                     </span>
                                     <img src="{{ asset('stream/assets/images/ic_check.svg') }}" alt="stream" />
                                 </div>
@@ -115,7 +115,7 @@
 
                             <form action="#" method="POST">
                                 @csrf
-                                {{-- <input type="hidden" name="package_id" value="{{ $standard->id }}"> --}}
+                                <input type="hidden" name="package_id" value="{{ $standard->id }}">
                                 <button type="submit" class="mt-10 py-3 block bg-green-600 rounded-full text-center">
                                     <span class="text-white text-base font-semibold">
                                         Subscribe
@@ -128,10 +128,10 @@
                         <div
                             class="pricing-card flex flex-col p-[30px] bg-white rounded-2xl w-full lg: w-[330px] md:max-w-max lg:max-w-[330px]">
                             <p class="text-stream-dark font-medium text-base">
-                                {{-- {{ ucwords($gold->name) }} --}}
+                                {{ ucwords($gold->name) }}
                             </p>
                             <div class="text-3xl text-stream-dark font-semibold my-1">
-                                {{-- Rp {{ number_format($gold->price) }} --}}
+                                Rp {{ number_format($gold->price) }}
                             </div>
                             <p class="text-sm text-stream-gray">
                                 /bulan
@@ -143,7 +143,7 @@
                                 <!-- benefits -->
                                 <div class="flex items-center justify-between gap-3">
                                     <span class="li-benefits">
-                                        {{-- {{ $gold->max_users }} Users Limits --}}
+                                        {{ $gold->max_users }} Users Limits
                                     </span>
                                     <img src="{{ asset('stream/assets/images/ic_check.svg') }}" alt="stream" />
                                 </div>
@@ -179,7 +179,7 @@
 
                             <form action="#" method="POST">
                                 @csrf
-                                {{-- <input type="hidden" name="package_id" value="{{ $gold->id }}"> --}}
+                                <input type="hidden" name="package_id" value="{{ $gold->id }}">
                                 <button type="submit" class="mt-10 py-3 block bg-indigo-600 rounded-full text-center">
                                     <span class="text-white text-base font-semibold">
                                         Subscribe
