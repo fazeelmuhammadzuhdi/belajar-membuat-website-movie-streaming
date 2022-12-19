@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Member\DashboardController as MemberDashboardController;
 use App\Http\Controllers\Member\LoginController as MemberLoginController;
+use App\Http\Controllers\Member\MovieController as MemberMovieController;
 use App\Http\Controllers\Member\PricingController;
 use App\Http\Controllers\Member\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -42,9 +44,9 @@ Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login
 Route::post('/admin/login', [LoginController::class, 'authenticate'])->name('admin.login.auth');
 
 Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
-    Route::get('test', function () {
-        return 'Kamu berhasil Login di Halaman Ini';
-    });
+    Route::get('/', [MemberDashboardController::class, 'index'])->name('member.dashboard');
+    Route::get('movie/{id}', [MemberMovieController::class, 'show'])->name('member.movie.detail');
+    Route::get('movie/{id}/watch', [MemberMovieController::class, 'watch'])->name('member.movie.watch');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin.auth']], function () {
