@@ -9,6 +9,7 @@ use App\Http\Controllers\Member\LoginController as MemberLoginController;
 use App\Http\Controllers\Member\MovieController as MemberMovieController;
 use App\Http\Controllers\Member\PricingController;
 use App\Http\Controllers\Member\RegisterController;
+use App\Http\Controllers\Member\TransactionController as MemberTransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,8 @@ Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
     Route::get('/', [MemberDashboardController::class, 'index'])->name('member.dashboard');
     Route::get('movie/{id}', [MemberMovieController::class, 'show'])->name('member.movie.detail');
     Route::get('movie/{id}/watch', [MemberMovieController::class, 'watch'])->name('member.movie.watch');
+
+    Route::post('transaction', [MemberTransactionController::class, 'store'])->name('member.transaction.store');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin.auth']], function () {
