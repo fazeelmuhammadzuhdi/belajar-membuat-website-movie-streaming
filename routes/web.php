@@ -10,6 +10,7 @@ use App\Http\Controllers\Member\MovieController as MemberMovieController;
 use App\Http\Controllers\Member\PricingController;
 use App\Http\Controllers\Member\RegisterController;
 use App\Http\Controllers\Member\TransactionController as MemberTransactionController;
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,12 @@ Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 // Route::get('/admin/dashboard', [DashboardController::class, 'index']);
 Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
 Route::post('/admin/login', [LoginController::class, 'authenticate'])->name('admin.login.auth');
+
+//Midtrans Handler
+Route::post('/payment-notification', [WebhookController::class, 'handler'])
+    ->withoutMiddleware(VerifyCsrfToken::class);
+
+Route::view('/payment-finish', 'member.payment-finish')->name('member.payment.finish');
 
 Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
     Route::get('/', [MemberDashboardController::class, 'index'])->name('member.dashboard');
