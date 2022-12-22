@@ -35,8 +35,17 @@ class LoginController extends Controller
         }
 
         return back()->withErrors(['credentials' => "Your Credentials Wrongg !!"])->withInput();
-
-
         // return 'visa login niihh';
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
