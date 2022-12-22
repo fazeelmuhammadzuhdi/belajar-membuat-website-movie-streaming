@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $movies = Movie::orderBy('featured', 'DESc')->orderBy('created_at', 'DESC')->get();
+        $movies = Movie::orderBy('featured', 'DESC')->orderBy('created_at', 'DESC')->get();
         return view('member.dashboard', [
             'movies' => $movies
         ]);
