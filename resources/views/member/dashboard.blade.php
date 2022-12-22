@@ -9,7 +9,7 @@
     <div>
         <div class="font-semibold text-[22px] text-white mb-[18px]">Featured</div>
         <div class="grid grid-cols-2 gap-5 xl:gap-12">
-            {{-- @foreach ($movies as $movie)
+            @foreach ($movies as $movie)
                 <div class="col-span-1 relative overflow-hidden group">
                     <img src="{{ asset('storage/thumbnail/' . $movie->large_thumbnail) }}" class="object-cover rounded-[30px]"
                         alt="">
@@ -30,7 +30,7 @@
                     </div>
                     <a href="{{ route('member.movie.detail', $movie->id) }}" class="inset-0 absolute z-50"></a>
                 </div>
-            @endforeach --}}
+            @endforeach
         </div>
     </div>
     <!-- /Movies -->
@@ -89,7 +89,8 @@
                 <div
                     class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
                     -translate-x-1/2 z-20 transition ease-in-out duration-500">
-                    <img src="{{ asset('stream/assets/images/ic_play.svg') }}" class="" width="80" alt="">
+                    <img src="{{ asset('stream/assets/images/ic_play.svg') }}" class="" width="80"
+                        alt="">
                 </div>
                 <a href="watching.html" class="inset-0 absolute z-50"></a>
             </div>
@@ -107,7 +108,8 @@
                 <div
                     class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
                     -translate-x-1/2 z-20 transition ease-in-out duration-500">
-                    <img src="{{ asset('stream/assets/images/ic_play.svg') }}" class="" width="80" alt="">
+                    <img src="{{ asset('stream/assets/images/ic_play.svg') }}" class="" width="80"
+                        alt="">
                 </div>
                 <a href="watching.html" class="inset-0 absolute z-50"></a>
             </div>
@@ -125,7 +127,8 @@
                 <div
                     class="absolute top-1/2 left-1/2 -translate-y-[500px] group-hover:-translate-y-1/2
                     -translate-x-1/2 z-20 transition ease-in-out duration-500">
-                    <img src="{{ asset('stream/assets/images/ic_play.svg') }}" class="" width="80" alt="">
+                    <img src="{{ asset('stream/assets/images/ic_play.svg') }}" class="" width="80"
+                        alt="">
                 </div>
                 <a href="{{ route('member.dashboard') }}" class="inset-0 absolute z-50"></a>
             </div>

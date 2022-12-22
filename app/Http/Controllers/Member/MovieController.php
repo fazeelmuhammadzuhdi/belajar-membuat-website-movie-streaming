@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Movie;
 use App\Models\UserPremium;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,7 +12,10 @@ class MovieController extends Controller
 {
     public function show($id)
     {
-        return view('member.movie-detail');
+        $movie = Movie::find($id);
+        return view('member.movie-detail', [
+            'movie' => $movie
+        ]);
     }
 
     public function watch($id)
@@ -36,7 +40,10 @@ class MovieController extends Controller
 
             // dd($isValid);
             if ($isValid) {
-                return view('member.movie-watching');
+                $movie = Movie::find($id);
+                return view('member.movie-watching', [
+                    'movie' => $movie
+                ]);
             }
         }
         return redirect()->route('pricing');
