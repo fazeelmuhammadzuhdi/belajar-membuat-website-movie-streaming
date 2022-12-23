@@ -1,7 +1,7 @@
 <!-- START: Sidebar -->
 <aside class="fixed z-50 w-[360px] bg-stream-dark">
     <div class="flex flex-col p-12 border-r border-softpur overflow-y-auto h-screen">
-        <a href="/">
+        <a href="{{ route('member.dashboard') }}">
             <img src="{{ asset('stream/assets/images/stream.svg') }}" alt="">
         </a>
         <div class="links flex flex-col mt-16 gap-2">

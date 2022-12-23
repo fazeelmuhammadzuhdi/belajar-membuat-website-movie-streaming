@@ -30,6 +30,7 @@ class JwtVerifyToken
             $request->attributes->add([
                 'user' => $token->user
             ]);
+            
             return $next($request);
             // dd($token);
         } catch (BeforeValidException $e) {

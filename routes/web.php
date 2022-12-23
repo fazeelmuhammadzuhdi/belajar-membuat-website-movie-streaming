@@ -52,32 +52,32 @@ Route::post('/payment-notification', [WebhookController::class, 'handler'])
 
 Route::view('/payment-finish', 'member.payment-finish')->name('member.payment.finish');
 
-Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
-    Route::get('/', [MemberDashboardController::class, 'index'])->name('member.dashboard');
-    Route::get('movie/{id}', [MemberMovieController::class, 'show'])->name('member.movie.detail');
-    Route::get('movie/{id}/watch', [MemberMovieController::class, 'watch'])->name('member.movie.watch');
+// Route::group(['prefix' => 'member', 'middleware' => ['auth']], function () {
+//     Route::get('/', [MemberDashboardController::class, 'index'])->name('member.dashboard');
+//     Route::get('movie/{id}', [MemberMovieController::class, 'show'])->name('member.movie.detail');
+//     Route::get('movie/{id}/watch', [MemberMovieController::class, 'watch'])->name('member.movie.watch');
 
-    Route::post('transaction', [MemberTransactionController::class, 'store'])->name('member.transaction.store');
+//     Route::post('transaction', [MemberTransactionController::class, 'store'])->name('member.transaction.store');
 
-    Route::get('subscription', [UserPremiumController::class, 'index'])->name('member.user_premium.index');
-    Route::delete('subscription/{id}', [UserPremiumController::class, 'destroy'])->name('member.user_premium.destroy');
+//     Route::get('subscription', [UserPremiumController::class, 'index'])->name('member.user_premium.index');
+//     Route::delete('subscription/{id}', [UserPremiumController::class, 'destroy'])->name('member.user_premium.destroy');
 
-    Route::get('/logout', [MemberLoginController::class, 'logout'])->name('member.login.logout');
-});
+//     Route::get('/logout', [MemberLoginController::class, 'logout'])->name('member.login.logout');
+// });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['admin.auth']], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+// Route::group(['prefix' => 'admin', 'middleware' => ['admin.auth']], function () {
+//     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-    Route::get('/logout', [LoginController::class, 'logout'])->name('admin.login.logout');
+//     Route::get('/logout', [LoginController::class, 'logout'])->name('admin.login.logout');
 
-    Route::group(['prefix' => 'movie'], function () {
-        Route::get('/', [MovieController::class, 'index'])->name('movie.index');
-        Route::get('/create', [MovieController::class, 'create'])->name('movie.create');
-        Route::post('/store', [MovieController::class, 'store'])->name('movie.store');
-        Route::get('/edit/{id}', [MovieController::class, 'edit'])->name('movie.edit');
-        Route::put('/update/{id}', [MovieController::class, 'update'])->name('movie.update');
-        Route::delete('/delete/{id}', [MovieController::class, 'destroy'])->name('movie.destroy');
-    });
+//     Route::group(['prefix' => 'movie'], function () {
+//         Route::get('/', [MovieController::class, 'index'])->name('movie.index');
+//         Route::get('/create', [MovieController::class, 'create'])->name('movie.create');
+//         Route::post('/store', [MovieController::class, 'store'])->name('movie.store');
+//         Route::get('/edit/{id}', [MovieController::class, 'edit'])->name('movie.edit');
+//         Route::put('/update/{id}', [MovieController::class, 'update'])->name('movie.update');
+//         Route::delete('/delete/{id}', [MovieController::class, 'destroy'])->name('movie.destroy');
+//     });
 
-    Route::get('/transaction', [TransactionController::class, 'index'])->name('admin.transaction');
-});
+//     Route::get('/transaction', [TransactionController::class, 'index'])->name('admin.transaction');
+// });
