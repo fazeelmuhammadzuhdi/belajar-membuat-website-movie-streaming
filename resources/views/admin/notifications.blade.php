@@ -75,11 +75,11 @@
                                             <td>{{ $notification->id }}</td>
                                             <td>{{ $notification->title }}</td>
                                             <td>{{ $notification->body }}</td>
-                                            <td>
+                                           x <td>
                                                 @if ($notification->status === 'success')
-                                                    <span style="color:blue;">{{ $notification->status }}</span>
+                                                    <span class="badge badge-success">{{ $notification->status }}</span>
                                                 @else
-                                                    <span style="color:red;">{{ $notification->status }}</span>
+                                                    <span class="badge badge-danger">{{ $notification->status }}</span>
                                                 @endif
                                             </td>
                                             <td>{{ $notification->response }}</td>
